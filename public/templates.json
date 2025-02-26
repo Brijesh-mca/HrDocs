@@ -1,0 +1,66 @@
+[
+  {
+    "id": "1",
+    "title": "Internship Certificate",
+    "description": "Certificate for successful internship completion.",
+    "image": "/images/internship-certificate.jpg",
+    "category": "Certificates",
+    "modified": "2024-01-15"
+  },
+  {
+    "id": "2",
+    "title": "Relieving Letter",
+    "description": "Official relieving letter from employment.",
+    "image": "/images/relieving-letter.jpg",
+    "category": "Letters",
+    "modified": "2024-01-14"
+  },
+  {
+    "id": "3",
+    "title": "Offer Letter",
+    "description": "Formal job offer letter.",
+    "image": "/images/offer-letter.jpg",
+    "category": "Letters",
+    "modified": "2024-01-13"
+  },
+  {
+    "id": "4",
+    "title": "Offer Letter",
+    "description": "Formal job offer letter.",
+    "image": "/images/offer-letter.jpg",
+    "category": "Letters",
+    "modified": "2024-01-13"
+  },
+  {
+    "id": "5",
+    "title": "Internship Certificate",
+    "description": "Certificate for successful internship completion.",
+    "image": "/images/internship-certificate.jpg",
+    "category": "Certificates",
+    "modified": "2024-01-15"
+  },
+  {
+    "id": "6",
+    "title": "Relieving Letter",
+    "description": "Official relieving letter from employment.",
+    "image": "/images/relieving-letter.jpg",
+    "category": "Letters",
+    "modified": "2024-01-14"
+  },
+  {
+    "id": "7",
+    "title": "Offer Letter",
+    "description": "Formal job offer letter.",
+    "image": "/images/offer-letter.jpg",
+    "category": "Letters",
+    "modified": "2024-01-13"
+  },
+  {
+    "id": "8",
+    "title": "Offer Letter",
+    "description": "Formal job offer letter.",
+    "image": "/images/offer-letter.jpg",
+    "category": "Letters",
+    "modified": "2024-01-13"
+  }
+]
