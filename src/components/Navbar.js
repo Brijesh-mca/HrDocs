@@ -59,7 +59,7 @@ export default function Navbar() {
           <Link ref={homeRef} href="/" className="hover:text-gray-700 transition-transform duration-200 transform hover:scale-105">
           Dashboard
           </Link>
-          <Link ref={templatesRef} href="/templates" className="hover:text-gray-700 transition-transform duration-200 transform hover:scale-105">
+          <Link ref={templatesRef} href="/template" className="hover:text-gray-700 transition-transform duration-200 transform hover:scale-105">
             Templates
           </Link>
           <Link ref={adminRef} href="/admin/templates" className="hover:text-gray-700 transition-transform duration-200 transform hover:scale-105">
