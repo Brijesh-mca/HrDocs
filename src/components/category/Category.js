@@ -71,7 +71,7 @@ export default function Category() {
                   transition={{ delay: i * 0.1 }}
                   className="text-sm hover:underline pl-2 py-1 flex items-center gap-2"
                 >
-                  🔹 <Link href="#">{sub}</Link>
+                  🔹 <Link href={`/template/${sub}`}>{sub}</Link>
                 </motion.li>
               ))}
             </motion.ul>

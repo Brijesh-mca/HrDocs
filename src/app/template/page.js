@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
-import Category from "@/components/Category";
-import TemplateCard from "@/components/TemplateCard";
+import Category from "@/components/category/Category";
+import TemplateCard from "@/components/templateCard/TemplateCard";
 
 export default function Home() {
   const [templates, setTemplates] = useState([]);

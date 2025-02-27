@@ -19,7 +19,7 @@ export default function TemplateCard({ template, onDelete, onEdit }) {
   };
 
   return (
-    <div className="border rounded-lg p-4 shadow-md hover:shadow-lg transition bg-white">
+    <div className="border rounded-lg p-4 shadow-md hover:shadow-lg hover:bg-teal-100 transition bg-white">
       {/* Image */}
       <Image
         src={template.image}
@@ -62,7 +62,7 @@ export default function TemplateCard({ template, onDelete, onEdit }) {
           <p className="text-xs text-gray-400 mt-1">📅 Modified {template.modified}</p>
 
           {/* Buttons */}
-          <div className="flex gap-2 mt-3">
+          <div className="flex gap-2 mt-3 justify-between">
             <Link href={`/template/${template.id}`}>
               <button className="bg-blue-600 text-white text-sm px-3 py-1 rounded-lg">
                 🔄 Generate
