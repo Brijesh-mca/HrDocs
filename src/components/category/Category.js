@@ -2,7 +2,14 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ChevronDown, ChevronUp, FileText, Briefcase, Users, BadgeCheck } from "lucide-react";
+import {
+  ChevronDown,
+  ChevronUp,
+  FileText,
+  Briefcase,
+  Users,
+  BadgeCheck,
+} from "lucide-react";
 
 export default function Category() {
   const [openCategory, setOpenCategory] = useState(null);
@@ -12,7 +19,11 @@ export default function Category() {
     {
       name: "Certificates",
       icon: <FileText size={18} />,
-      subcategories: ["Internship Certificate", "Appreciation Certificate", "Workshop Completion"],
+      subcategories: [
+        "Internship Certificate",
+        "Appreciation Certificate",
+        "Workshop Completion",
+      ],
     },
     {
       name: "Employment",
@@ -22,7 +33,11 @@ export default function Category() {
     {
       name: "HR Documents",
       icon: <Users size={18} />,
-      subcategories: ["Exit Interview Form", "Warning Letter", "Performance Reports"],
+      subcategories: [
+        "Exit Interview Form",
+        "Warning Letter",
+        "Performance Reports",
+      ],
     },
     {
       name: "Others",
@@ -49,7 +64,11 @@ export default function Category() {
               <span className="flex items-center gap-2">
                 {category.icon} {category.name}
               </span>
-              {openCategory === index ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+              {openCategory === index ? (
+                <ChevronUp size={18} />
+              ) : (
+                <ChevronDown size={18} />
+              )}
             </button>
 
             {/* Subcategories (Now Fully Visible & Aligned) */}
@@ -67,11 +86,20 @@ export default function Category() {
                 <motion.li
                   key={i}
                   initial={{ opacity: 0, x: -10 }}
-                  animate={openCategory === index ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
+                  animate={
+                    openCategory === index
+                      ? { opacity: 1, x: 0 }
+                      : { opacity: 0, x: -10 }
+                  }
                   transition={{ delay: i * 0.1 }}
                   className="text-sm hover:underline pl-2 py-1 flex items-center gap-2"
                 >
-                  🔹 <Link href={`/template/${sub}`}>{sub}</Link>
+                  🔹{" "}
+                  <Link
+                    href={`/template/${category.name.toLowerCase()}/${sub.toLowerCase()}`}
+                  >
+                    {sub}
+                  </Link>
                 </motion.li>
               ))}
             </motion.ul>

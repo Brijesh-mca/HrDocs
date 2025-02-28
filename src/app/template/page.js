@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Category from "@/components/category/Category";
 import TemplateCard from "@/components/templateCard/TemplateCard";
 
-export default function Home() {
+export default function Template() {
   const [templates, setTemplates] = useState([]);
 
   useEffect(() => {
@@ -28,16 +28,18 @@ export default function Home() {
   };
 
   return (
-    <div className="container mx-auto pt-5">
-      <div className="flex gap-4">
-        {/* Category Section (Fixed Width) */}
-       
-          <Category />
+    <div className="container mx-auto pt-5 px-4">
+      <div className="flex gap-6 ">
+        {/* Category Section */}
         
+      
+         <Category />
+         
+       
 
         {/* Main Container (Full Width) */}
-        <div className="w-4/5 text-black text-center pt-10">
-          <div className="p-6 grid grid-cols-3 md:grid-cols-4 gap-4">
+        <div className="w-4/5">
+          <div className="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {templates.map((template) => (
               <TemplateCard
                 key={template.id}

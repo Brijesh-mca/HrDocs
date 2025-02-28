@@ -56,17 +56,17 @@ export default function Navbar() {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex space-x-6">
-          <Link ref={homeRef} href="/" className="hover:text-gray-700 transition-transform duration-200 transform hover:scale-105">
-          Dashboard
+          <Link ref={homeRef} href="/" className="hover:text-gray-700 font-bold transition-transform duration-200 transform hover:scale-1.5">
+          DASHBOARD
           </Link>
-          <Link ref={templatesRef} href="/template" className="hover:text-gray-700 transition-transform duration-200 transform hover:scale-105">
-            Templates
+          <Link ref={templatesRef} href="/template" className="hover:text-gray-700 font-bold transition-transform duration-200 transform hover:scale-105">
+            TEMPLATES
           </Link>
-          <Link ref={adminRef} href="/admin/templates" className="hover:text-gray-700 transition-transform duration-200 transform hover:scale-105">
-          Genrate Documents
+          <Link ref={adminRef} href="/admin/templates" className="hover:text-gray-700 font-bold transition-transform duration-200 transform hover:scale-105">
+    GENERATE DOCUMENTS
           </Link>
-          <Link ref={signInRef} href="/signin" className="hover:text-gray-700 transition-transform duration-200 transform hover:scale-105">
-          Settings
+          <Link ref={signInRef} href="/signin" className="hover:text-gray-700 font-bold transition-transform duration-200 transform hover:scale-105">
+          SETTINGS
           </Link>
         </div>
 
@@ -74,7 +74,7 @@ export default function Navbar() {
           <Link ref={homeRef} href="/" className="hover:text-gray-700 transition-transform duration-200 transform hover:scale-105">
          <User className="w-8 h-8 text-gray-600" />
           </Link>
-          <span>User</span>
+          <span className="font-bold">User</span>
         </div>
 
         {/* Mobile Menu Button */}
@@ -85,7 +85,7 @@ export default function Navbar() {
 
       {/* Mobile Menu Dropdown */}
       {isOpen && (
-        <div ref={mobileMenuRef} className="md:hidden flex flex-col items-center py-4 bg-slate-400 rounded-lg shadow-md">
+        <div ref={mobileMenuRef} className="md:hidden flex flex-col items-center py-4  rounded-lg shadow-md">
           <Link ref={homeRef} href="/" className="py-2 text-lg font-medium hover:text-gray-800 transition-transform duration-200 transform hover:scale-105" onClick={() => setIsOpen(false)}>
             Home
           </Link>
