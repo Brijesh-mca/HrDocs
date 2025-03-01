@@ -5,6 +5,7 @@ import Image from "next/image";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
+
 export default function TemplatePage() {
   const { id } = useParams();
   const [template, setTemplate] = useState(null);
@@ -87,7 +88,7 @@ export default function TemplatePage() {
       <div ref={previewRef} className="p-6 border bg-blue-100 text-blue-900 border-gray-400 rounded-lg shadow-lg  w-full max-w-lg text-center">
         <h1 className="text-2xl font-bold">{template.title}</h1>
         <p className="text-gray-600">{template.description}</p>
-        {/* <Image src={template.image} alt={template.title} width={400} height={250} className="rounded-lg mt-4" /> */}
+        <Image src={template.image} alt={template.title} width={400} height={250} className="rounded-lg mt-4" />
         <p className="text-gray-500 mt-2">Name: {formData.name || "Your Name"}</p>
         <p className="text-gray-500">Email: {formData.email || "your@email.com"}</p>
         <p className="text-gray-500">Company: {formData.company || "Your Company"}</p>

@@ -2,23 +2,24 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import {
-  ChevronDown,
-  ChevronUp,
-  FileText,
-  Briefcase,
-  Users,
-  BadgeCheck,
-} from "lucide-react";
 
 export default function Category() {
   const [openCategory, setOpenCategory] = useState(null);
 
-  // Category Data
+  // Category Data with Font Awesome Icons
   const categories = [
     {
+      name: "All",
+      icon: <i className="fa-solid fa-file-alt text-xl text-blue-500"></i>,
+      subcategories: [
+        "Internship Certificate",
+        "Appreciation Certificate",
+        "Workshop Completion",
+      ],
+    },
+    {
       name: "Certificates",
-      icon: <FileText size={18} />,
+      icon: <i className="fa-solid fa-file-alt text-xl text-blue-500"></i>,
       subcategories: [
         "Internship Certificate",
         "Appreciation Certificate",
@@ -27,12 +28,12 @@ export default function Category() {
     },
     {
       name: "Employment",
-      icon: <Briefcase size={18} />,
+      icon: <i className="fa-solid fa-briefcase text-xl text-green-500"></i>,
       subcategories: ["Offer Letter", "Appointment Letter", "Relieving Letter"],
     },
     {
       name: "HR Documents",
-      icon: <Users size={18} />,
+      icon: <i className="fa-solid fa-users text-xl text-purple-500"></i>,
       subcategories: [
         "Exit Interview Form",
         "Warning Letter",
@@ -41,7 +42,7 @@ export default function Category() {
     },
     {
       name: "Others",
-      icon: <BadgeCheck size={18} />,
+      icon: <i className="fa-solid fa-id-badge text-xl text-orange-500"></i>,
       subcategories: ["Virtual ID Card", "Contest Qualification Letter"],
     },
   ];
@@ -61,17 +62,17 @@ export default function Category() {
               className="flex items-center justify-between w-full text-left p-2 rounded-md transition-all duration-300 hover:bg-gray-100"
               onClick={() => toggleCategory(index)}
             >
-              <span className="flex items-center gap-2">
+              <span className="flex items-center gap-2 text-md font-semibold">
                 {category.icon} {category.name}
               </span>
-              {openCategory === index ? (
-                <ChevronUp size={18} />
-              ) : (
-                <ChevronDown size={18} />
-              )}
+              <i
+                className={`fa-solid ${
+                  openCategory === index ? "fa-chevron-up" : "fa-chevron-down"
+                } text-gray-500`}
+              ></i>
             </button>
 
-            {/* Subcategories (Now Fully Visible & Aligned) */}
+            {/* Subcategories */}
             <motion.ul
               initial={false}
               animate={openCategory === index ? "open" : "closed"}
@@ -92,9 +93,9 @@ export default function Category() {
                       : { opacity: 0, x: -10 }
                   }
                   transition={{ delay: i * 0.1 }}
-                  className="text-sm hover:underline pl-2 py-1 flex items-center gap-2"
+                  className=" text-md font-semibold pl-2 py-1 flex items-center gap-2"
                 >
-                  🔹{" "}
+        <i className="fa-solid fa-circle-arrow-right text-lg text-blue-500"></i>
                   <Link
                     href={`/template/${category.name.toLowerCase()}/${sub.toLowerCase()}`}
                   >

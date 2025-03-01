@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Pencil, Trash2, Save } from "lucide-react";
+import { Save, Trash } from "lucide-react";
 
 export default function TemplateCard({ template, onDelete, onEdit }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -20,17 +20,17 @@ export default function TemplateCard({ template, onDelete, onEdit }) {
   };
 
   return (
-    <div className="border rounded-xl p-5 shadow-lg hover:shadow-xl hover:bg-teal-50 transition bg-white w-full max-w-md">
+    <div className="border-4 rounded-xl p-5 shadow-lg transition bg-white w-full max-w-md hover:shadow-xl">
       {/* Image */}
-      {/* <div className="rounded-lg overflow-hidden">
+      <div className="rounded-lg overflow-hidden">
         <Image
           src={template.image}
           alt={template.title}
           width={400}
-          height={200}
-          className="rounded-lg w-full"
+          height={100}
+          className="rounded-lg"
         />
-      </div> */}
+      </div>
 
       {/* Edit Mode */}
       {isEditing ? (
@@ -50,7 +50,7 @@ export default function TemplateCard({ template, onDelete, onEdit }) {
           />
           <button
             onClick={handleSave}
-            className="bg-green-500 text-white text-sm px-3 py-1 rounded-lg flex items-center gap-1 mt-2 hover:bg-green-600"
+            className="bg-green-500 text-white text-sm px-3 py-1 rounded-lg flex items-center gap-1 mt-2 hover:bg-green-600 transition"
           >
             <Save size={16} /> Save
           </button>
@@ -60,32 +60,37 @@ export default function TemplateCard({ template, onDelete, onEdit }) {
         <>
           <div className="mt-4">
             <h3 className="text-lg font-semibold">{template.title}</h3>
-            <span className="text-sm text-gray-500 bg-gray-200 px-2 py-1 rounded-full">
+          </div>
+          <div className="flex justify-between">
+            <p className="text-xs text-gray-600 mt-1">
+              📅 Modified {template.modified}
+            </p>
+            <span className="text-sm text-gray-700 px-2 py-1 rounded">
               {template.category}
             </span>
           </div>
 
-          <p className="text-xs text-gray-400 mt-1">📅 Modified {template.modified}</p>
-
           {/* Buttons */}
           <div className="flex gap-3 mt-4 justify-between items-center">
             <Link href={`/template/${template.id}`}>
-              <button className="bg-blue-600 text-white text-sm px-4 py-2  hover:bg-blue-800">
-                🔄 Generate
+            <button className="bg-blue-600 rounded-lg text-white font-bold text-sm px-4 py-2 hover:bg-blue-700 transition flex items-center gap-2">
+            <i className="fa-solid fa-file-export"></i> Generate
               </button>
             </Link>
             <div className="flex gap-3">
+              {/* Font Awesome Edit Icon */}
               <button
                 onClick={() => setIsEditing(true)}
-                className="text-gray-600 text-sm flex items-center gap-1 p-2 hover:text-gray-800 "
+                className="p-2 rounded-lg hover:bg-gray-200 transition"
               >
-                <Pencil size={18} />
+                <i className="fa-solid fa-pen-to-square text-blue-500 text-lg hover:text-blue-700"></i>
               </button>
+              {/* Delete Button */}
               <button
                 onClick={() => onDelete(template.id)}
-                className="text-red-500 text-sm flex items-center gap-1 p-2 hover:text-red-700"
+                className="p-2 rounded-lg hover:bg-red-100 transition"
               >
-                <Trash2 size={18} />
+                <i className="fa-solid fa-trash text-red-500 text-lg hover:text-red-700"></i>
               </button>
             </div>
           </div>

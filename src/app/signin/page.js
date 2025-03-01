@@ -5,14 +5,43 @@ import { motion } from "framer-motion";
 
 export default function SignIn() {
   const [form, setForm] = useState({ email: "", password: "" });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Sign In Data:", form);
+    setLoading(true);
+    setError(null);
+
+    try {
+      const res = await fetch("http://localhost:4000/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || "Login failed");
+      }
+
+      console.log("Login Successful:", data);
+      alert("Login Successful!");
+      // Redirect or handle login success (store token, update state, etc.)
+
+    } catch (err) {
+      console.error("Login Error:", err.message);
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -26,6 +55,9 @@ export default function SignIn() {
         <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
           Welcome Back 👋
         </h2>
+        {error && (
+          <p className="text-red-500 text-center mb-4">{error}</p>
+        )}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-gray-700 font-semibold">Email</label>
@@ -52,9 +84,14 @@ export default function SignIn() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="w-full bg-gradient-to-r from-blue-600 to-blue-400 text-white py-2 rounded-lg shadow-md hover:shadow-xl transition"
+            disabled={loading}
+            className={`w-full text-white py-2 rounded-lg shadow-md transition ${
+              loading
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-gradient-to-r from-blue-600 to-blue-400 hover:shadow-xl"
+            }`}
           >
-            Sign In
+            {loading ? "Signing In..." : "Sign In"}
           </motion.button>
         </form>
         <p className="text-center text-sm text-gray-500 mt-4">
