@@ -62,7 +62,7 @@ export default function Navbar() {
           <Link ref={templatesRef} href="/template" className="hover:text-gray-700 font-bold transition-transform duration-200 transform hover:scale-105">
             TEMPLATES
           </Link>
-          <Link ref={adminRef} href="/admin/templates" className="hover:text-gray-700 font-bold transition-transform duration-200 transform hover:scale-105">
+          <Link ref={adminRef} href="/admin" className="hover:text-gray-700 font-bold transition-transform duration-200 transform hover:scale-105">
     GENERATE DOCUMENTS
           </Link>
           <Link ref={signInRef} href="/signin" className="hover:text-gray-700 font-bold transition-transform duration-200 transform hover:scale-105">

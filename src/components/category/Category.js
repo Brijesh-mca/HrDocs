@@ -10,11 +10,17 @@ export default function Category() {
   const categories = [
     {
       name: "All",
-      icon: <i className="fa-solid fa-file-alt text-xl text-blue-500"></i>,
+      icon: <i className="fa-solid fa-folder-open text-xl text-blue-500"></i>,
       subcategories: [
         "Internship Certificate",
         "Appreciation Certificate",
         "Workshop Completion",
+        "Offer Letter",
+        "Appointment Letter",
+        "Relieving Letter",
+        "Exit Interview Form",
+        "Warning Letter",
+        "Performance Reports",
       ],
     },
     {
@@ -63,7 +69,7 @@ export default function Category() {
               onClick={() => toggleCategory(index)}
             >
               <span className="flex items-center gap-2 text-md font-semibold">
-                {category.icon} {category.name}
+                {category.icon} <span className="whitespace-nowrap">{category.name}</span>
               </span>
               <i
                 className={`fa-solid ${
@@ -93,14 +99,14 @@ export default function Category() {
                       : { opacity: 0, x: -10 }
                   }
                   transition={{ delay: i * 0.1 }}
-                  className=" text-md font-semibold pl-2 py-1 flex items-center gap-2"
+                  className="flex items-center gap-2 text-md font-semibold pl-2 py-1"
                 >
-        <i className="fa-solid fa-circle-arrow-right text-lg text-blue-500"></i>
-                  <Link
-                    href={`/template/${category.name.toLowerCase()}/${sub.toLowerCase()}`}
-                  >
-                    {sub}
-                  </Link>
+                  <i className="fa-solid fa-circle-arrow-right text-lg text-blue-500"></i>
+                  <span className="whitespace-nowrap">
+                    <Link href={`/template/${category.name.toLowerCase()}/${sub.toLowerCase()}`}>
+                      {sub}
+                    </Link>
+                  </span>
                 </motion.li>
               ))}
             </motion.ul>
