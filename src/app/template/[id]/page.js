@@ -1,84 +1,119 @@
 "use client";
-import { useParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 
-export default function TemplateFormPage() {
-  const { id } = useParams();
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
+
+export default function TemplatePage() {
   const router = useRouter();
-  const [template, setTemplate] = useState(null);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    company: "",
-    date: "",
-  });
+  const params = useParams();
+  const id = params.id;
 
+  const [name, setName] = useState("");
+  const [date, setDate] = useState(new Date().toLocaleDateString());
+  const [template, setTemplate] = useState(""); // Store HTML template
+  const [previewTemplate, setPreviewTemplate] = useState(""); // Store preview HTML
+
+  // Load HTML template from public folder
   useEffect(() => {
-    fetch("/templates.json")
-      .then((res) => res.json())
-      .then((data) => {
-        const foundTemplate = data.find((item) => item.id === id);
-        setTemplate(foundTemplate);
-      });
-  }, [id]);
+    fetch("/offer.html")
+      .then((res) => res.text())
+      .then((html) => setTemplate(html))
+      .catch((error) => console.error("Error loading template:", error));
+  }, []);
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
+  // Function to update preview when button is clicked
   const handlePreview = () => {
-    const query = new URLSearchParams(formData).toString();
-    router.push(`/preview/${id}?${query}`);
+    const updatedTemplate = template
+      .replace(/{{name}}/g, name || "Your Name")
+      .replace(/{{date}}/g, date);
+
+    setPreviewTemplate(updatedTemplate);
   };
 
-  if (!template) {
-    return <p className="p-6 text-red-500">Loading template details...</p>;
-  }
+  const handleDownload = async () => {
+    if (!name) {
+      alert("Please enter a name!");
+      return;
+    }
+
+    window.open(
+      `/api/convert-pdf?id=${id}&name=${encodeURIComponent(name)}&date=${encodeURIComponent(date)}`,
+      "_blank"
+    );
+  };
 
   return (
-    <div className="p-6 flex flex-col items-center">
-      <div className="mb-6 w-full max-w-md p-4 border border-gray-300 rounded-lg shadow">
-        <h2 className="text-xl font-bold mb-4">Fill Details</h2>
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          placeholder="Enter your name"
-          className="w-full p-2 mb-2 border rounded"
-        />
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          placeholder="Enter your email"
-          className="w-full p-2 mb-2 border rounded"
-        />
-        <input
-          type="text"
-          name="company"
-          value={formData.company}
-          onChange={handleChange}
-          placeholder="Enter company name"
-          className="w-full p-2 mb-2 border rounded"
-        />
-        <input
-          type="date"
-          name="date"
-          value={formData.date}
-          onChange={handleChange}
-          className="w-full p-2 mb-2 border rounded"
-        />
+    <div style={{ display: "flex", gap: "20px", padding: "20px", maxWidth: "1200px", margin: "auto" }}>
+      {/* ✅ LEFT: FORM */}
+      <div style={{ width: "30%", padding: "20px", border: "1px solid #ddd", borderRadius: "8px", background: "#f9f9f9" }}>
+        <h2>Fill Details</h2>
+        <label>
+          Name:{" "}
+          <input
+            type="text"
+            placeholder="Enter your name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            style={{
+              padding: "8px",
+              width: "100%",
+              border: "1px solid #ccc",
+              borderRadius: "4px",
+              marginTop: "5px",
+            }}
+          />
+        </label>
+        <button
+          onClick={handlePreview}
+          style={{
+            marginTop: "15px",
+            padding: "10px 15px",
+            background: "green",
+            color: "white",
+            border: "none",
+            borderRadius: "5px",
+            cursor: "pointer",
+            width: "100%",
+          }}
+        >
+          Preview
+        </button>
+        <button
+          onClick={handleDownload}
+          style={{
+            marginTop: "10px",
+            padding: "10px 15px",
+            background: "blue",
+            color: "white",
+            border: "none",
+            borderRadius: "5px",
+            cursor: "pointer",
+            width: "100%",
+          }}
+        >
+          Download PDF
+        </button>
       </div>
 
-      {/* Preview Button */}
-      <button
-        onClick={handlePreview}
-        className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg"
-      >
-        Preview
-      </button>
+      {/* ✅ RIGHT: LIVE PREVIEW (Only Shows After Clicking "Preview") */}
+      <div style={{ width: "70%", padding: "20px", border: "1px solid #ddd", borderRadius: "8px", background: "#fff" }}>
+        <h2>Live Preview</h2>
+        {previewTemplate ? (
+          <div
+            style={{
+              border: "1px solid #ccc",
+              padding: "15px",
+              maxHeight: "500px",
+              overflowY: "auto",
+              background: "#f1f1f1",
+            }}
+            dangerouslySetInnerHTML={{ __html: previewTemplate }}
+          />
+        ) : (
+          <p style={{ color: "gray" }}>Click "Preview" to see the template.</p>
+        )}
+      </div>
     </div>
   );
 }
